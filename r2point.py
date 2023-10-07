@@ -44,6 +44,27 @@ class R2Point:
             return self.x == other.x and self.y == other.y
         return False
 
+    # Расстояние от точки до отрезка
+    def dist_s(self, a, b):
+        dot_a = (self.x - a.x) * (b.x - a.x) + (self.y - a.y) * (b.y - a.y)
+        dot_b = (self.x - b.x) * (a.x - b.x) + (self.y - b.y) * (a.y - b.y)
+        if dot_b < 0:
+            d = sqrt((self.x - b.x)**2 + (self.y - b.y)**2)
+        elif dot_a < 0:
+            d = sqrt((self.x - a.x)**2 + (self.y - a.y)**2)
+        else:
+            d = abs((a.y - b.y) * self.x - (a.x - b.x) *
+                    self.y + a.x * b.y - a.y * b.x)/sqrt((a.y - b.y)**2 +
+                                                         (a.x - b.x)**2)
+        return d
+
+    # Лежит ли точка внутри треугольника
+    def is_in_tr(self, a, b, c):
+        if b.is_light(a, c):
+            a, c = c, a
+        return self.is_light(a, b) and self.is_light(b, c) \
+            and self.is_light(c, a)
+
 
 if __name__ == "__main__":
     x = R2Point(1.0, 1.0)
@@ -51,3 +72,5 @@ if __name__ == "__main__":
     print(x.dist(R2Point(1.0, 0.0)))
     a, b, c = R2Point(0.0, 0.0), R2Point(1.0, 0.0), R2Point(1.0, 1.0)
     print(R2Point.area(a, c, b))
+    p = R2Point(-50.0, -50.0)
+    print(p.is_in_tr(R2Point(1000, 0), R2Point(-1000, 0), R2Point(0, 1000)))

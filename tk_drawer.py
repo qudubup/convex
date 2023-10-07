@@ -51,6 +51,12 @@ class TkDrawer:
         self.canvas.create_line(x(p), y(p), x(q), y(q), fill="black", width=2)
         self.root.update()
 
+    def draw_triangle(self, p, q, w):
+        self.canvas.create_line(x(p), y(p), x(q), y(q), fill="red", width=2)
+        self.canvas.create_line(x(q), y(q), x(w), y(w), fill="red", width=2)
+        self.canvas.create_line(x(w), y(w), x(p), y(p), fill="red", width=2)
+        self.root.update()
+
 
 if __name__ == "__main__":
 

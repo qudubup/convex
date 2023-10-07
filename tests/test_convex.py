@@ -26,6 +26,9 @@ class TestVoid:
     def test_аrea(self):
         assert self.f.area() == 0.0
 
+    def test_cnt(self):
+        assert self.f.cnt() == 0
+
     # При добавлении точки нульугольник превращается в одноугольник
     def test_add(self):
         assert isinstance(self.f.add(R2Point(0.0, 0.0)), Point)
@@ -52,6 +55,13 @@ class TestPoint:
     # Площадь одноугольника нулевая
     def test_аrea(self):
         assert self.f.area() == 0.0
+
+    def test_cnt1(self):
+        assert self.f.cnt() == 0
+
+    def test_cnt2(self):
+        self.q = Point(R2Point(10, 10))
+        assert self.q.cnt() == 1
 
     # При добавлении точки одноугольник может не измениться
     def test_add1(self):
@@ -83,6 +93,13 @@ class TestSegment:
     # Площадь двуугольника нулевая
     def test_аrea(self):
         assert self.f.area() == 0.0
+
+    def test_cnt1(self):
+        assert self.f.cnt() == 0
+
+    def test_cnt2(self):
+        self.f = Segment(R2Point(10.0, 0.0), R2Point(-10.0, 0.0))
+        assert self.f.cnt() == 2
 
     # При добавлении точки двуугольник может не измениться
     def test_add1(self):
@@ -162,3 +179,37 @@ class TestPolygon:
 
     def test_area2(self):
         assert self.f.add(R2Point(1.0, 1.0)).area() == approx(1.0)
+
+    def test_cnt1(self):
+        assert self.f.cnt() == 0
+
+    def test_cnt2(self):
+        self.f.add(R2Point(100.0, 100.0))
+        assert self.f.cnt() == 1
+
+    def test_cnt3(self):
+        self.f.add(R2Point(100.0, 100.0))
+        self.f.add(R2Point(-100.0, -100.0))
+        assert self.f.cnt() == 2
+
+    def test_cnt4(self):
+        self.f.add(R2Point(100.0, 100.0))
+        self.f.add(R2Point(-100.0, -100.0))
+        self.f.add(R2Point(100.0, -100.0))
+        self.f.add(R2Point(-100.0, 100.0))
+        assert self.f.cnt() == 4
+
+    def test_cnt5(self):
+        self.f.add(R2Point(-1.0, 2.0))
+        self.f.add(R2Point(0.0, 4.0))
+        self.f.add(R2Point(1.0, 5.0))
+        self.f.add(R2Point(2.0, 4.0))
+        assert self.f.cnt() == 4
+
+    def test_cnt6(self):
+        self.f.add(R2Point(-1.0, 2.0))
+        self.f.add(R2Point(0.0, 4.0))
+        self.f.add(R2Point(1.0, 5.0))
+        self.f.add(R2Point(2.0, 4.0))
+        self.f.add(R2Point(10000.0, 3.0))
+        assert self.f.cnt() == 4

@@ -1,7 +1,7 @@
 #!/usr/bin/env -S python3 -B
 from tk_drawer import TkDrawer
 from r2point import R2Point
-from convex import Void, Point, Segment, Polygon
+from convex import Figure, Void, Point, Segment, Polygon
 
 
 def void_draw(self, tk):
@@ -32,12 +32,20 @@ tk = TkDrawer()
 f = Void()
 tk.clean()
 
+print("3 точки треугольника")
+Figure.Pnt1 = R2Point()
+Figure.Pnt2 = R2Point()
+Figure.Pnt3 = R2Point()
+tk.draw_triangle(Figure.Pnt1, Figure.Pnt2, Figure.Pnt3)
+print("Точки в оболочке")
+
 try:
     while True:
         f = f.add(R2Point())
         tk.clean()
+        tk.draw_triangle(Figure.Pnt1, Figure.Pnt2, Figure.Pnt3)
         f.draw(tk)
         print(f"S = {f.area()}, P = {f.perimeter()}\n")
-except(EOFError, KeyboardInterrupt):
+except (EOFError, KeyboardInterrupt):
     print("\nStop")
     tk.close()

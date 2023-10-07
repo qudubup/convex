@@ -70,3 +70,23 @@ class TestR2Point:
     def test_is_light4(self):
         a, b = R2Point(0.0, 0.0), R2Point(1.0, 0.0)
         assert R2Point(0.5, -0.5).is_light(a, b) is True
+
+    def test_dist_s_1(self):
+        a, b = R2Point(0.0, 0.0), R2Point(1.0, 1.0)
+        assert R2Point(0.0, 1.0).dist_s(a, b) == approx(1/sqrt(2))
+
+    def test_dist_s_2(self):
+        a, b = R2Point(0.0, 0.0), R2Point(1.0, 1.0)
+        assert R2Point(-2.0, 0.0).dist_s(a, b) == 2
+
+    def test_dist_s_3(self):
+        a, b = R2Point(0.0, 0.0), R2Point(1.0, 1.0)
+        assert R2Point(5.0, 1.0).dist_s(a, b) == 4
+
+    def test_is_in_tr_1(self):
+        a, b, c = R2Point(0.0, 0.0), R2Point(1.0, 1.0), R2Point(2.0, 0.0)
+        assert R2Point(1.0, 0.05).is_in_tr(a, b, c) is True
+
+    def test_is_in_tr_2(self):
+        a, b, c = R2Point(0.0, 0.0), R2Point(1.0, 1.0), R2Point(2.0, 0.0)
+        assert R2Point(10.0, 0.05).is_in_tr(a, b, c) is False
