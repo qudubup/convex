@@ -45,7 +45,7 @@ try:
         tk.clean()
         tk.draw_triangle(Figure.Pnt1, Figure.Pnt2, Figure.Pnt3)
         f.draw(tk)
-        print(f"S = {f.area()}, P = {f.perimeter()}\n")
+        print(f"S = {f.area()}, P = {f.perimeter()}, CNT = {f.cnt()}\n")
 except (EOFError, KeyboardInterrupt):
     print("\nStop")
     tk.close()

@@ -101,6 +101,14 @@ class TestSegment:
         self.f = Segment(R2Point(10.0, 0.0), R2Point(-10.0, 0.0))
         assert self.f.cnt() == 2
 
+    def test_cnt3(self):
+        self.f = Segment(R2Point(0.0, 0.0), R2Point(10.0, 0.0))
+        assert self.f.cnt() == 1
+
+    def test_cnt4(self):
+        self.f = Segment(R2Point(10.0, 0.0), R2Point(0.0, 0.0))
+        assert self.f.cnt() == 1
+
     # При добавлении точки двуугольник может не измениться
     def test_add1(self):
         assert self.f.add(R2Point(0.5, 0.0)) is self.f
@@ -213,3 +221,34 @@ class TestPolygon:
         self.f.add(R2Point(2.0, 4.0))
         self.f.add(R2Point(10000.0, 3.0))
         assert self.f.cnt() == 4
+
+    def test_cnt7(self):
+        self.g = Polygon(
+            R2Point(
+                10.0, 0.0), R2Point(
+                1.0, 0.0), R2Point(
+                0.0, 1.0))
+        assert self.g.cnt() == 1
+
+    def test_cnt8(self):
+        self.g = Polygon(
+            R2Point(
+                0.0, 0.0), R2Point(
+                11.0, 0.0), R2Point(
+                0.0, 1.0))
+        assert self.g.cnt() == 1
+
+    def test_cnt9(self):
+        self.g = Polygon(
+            R2Point(
+                0.0, 0.0), R2Point(
+                1.0, 0.0), R2Point(
+                0.0, 11.0))
+        assert self.g.cnt() == 1
+
+    def test_cnt10(self):
+        self.f.add(R2Point(-1.0, 2.0))
+        self.f.add(R2Point(0.0, 4.0))
+        self.f.add(R2Point(1.0, 5.0))
+        self.f.add(R2Point(2.0, 4.0))
+        self.f.add(R2Point(10000.0, 3.0))
