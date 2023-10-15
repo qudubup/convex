@@ -247,8 +247,61 @@ class TestPolygon:
         assert self.g.cnt() == 1
 
     def test_cnt10(self):
-        self.f.add(R2Point(-1.0, 2.0))
-        self.f.add(R2Point(0.0, 4.0))
-        self.f.add(R2Point(1.0, 5.0))
-        self.f.add(R2Point(2.0, 4.0))
-        self.f.add(R2Point(10000.0, 3.0))
+        self.f.add(R2Point(2.0, 2.0))
+        self.f.add(R2Point(-2.0, 2.0))
+        self.f.add(R2Point(2.0, -2.0))
+        self.f.add(R2Point(-2.0, -2.0))
+        self.f.add(R2Point(0.0, 2.5))
+        self.f.add(R2Point(-2.5, 0.0))
+        self.f.add(R2Point(2.5, 0.0))
+        self.f.add(R2Point(2.5, -2.5))
+        self.f.add(R2Point(-1.5, 2.7))
+        self.f.add(R2Point(-1.3, 2.7))
+        assert self.f.cnt() == 9
+
+    def test_cnt11(self):
+        self.f.add(R2Point(2.0, 2.0))
+        self.f.add(R2Point(-2.0, 2.0))
+        self.f.add(R2Point(2.0, -2.0))
+        self.f.add(R2Point(-2.0, -2.0))
+        self.f.add(R2Point(0.0, 2.5))
+        self.f.add(R2Point(-2.5, 0.0))
+        self.f.add(R2Point(2.5, 0.0))
+        self.f.add(R2Point(2.5, -2.5))
+        self.f.add(R2Point(-1.5, 2.7))
+        self.f.add(R2Point(-1.3, 2.7))
+        self.f.add(R2Point(-100000.0, -100000.0))
+        assert self.f.cnt() == 7
+
+    def test_cnt12(self):
+        self.f.add(R2Point(2.0, 2.0))
+        self.f.add(R2Point(-2.0, 2.0))
+        self.f.add(R2Point(2.0, -2.0))
+        self.f.add(R2Point(-2.0, -2.0))
+        self.f.add(R2Point(0.0, 2.5))
+        self.f.add(R2Point(-2.5, 0))
+        self.f.add(R2Point(2.5, 0))
+        self.f.add(R2Point(2.5, -2.5))
+        self.f.add(R2Point(-1.5, 2.7))
+        self.f.add(R2Point(-1.3, 2.7))
+        self.f.add(R2Point(-100000.0, -100000.0))
+        self.f.add(R2Point(-100000000000.0, 100000000000.0))
+        assert self.f.cnt() == 5
+
+    def test_cnt13(self):
+        f = Polygon(R2Point(0.0, 0.0),
+                    R2Point(1.0, 0.0),
+                    R2Point(0.0, 1.0))
+        assert f.add(R2Point(1, 1)).cnt() == 0
+
+    def test_cnt14(self):
+        f = Polygon(R2Point(0.0, 0.0),
+                    R2Point(1.0, 0.0),
+                    R2Point(0.0, 1.0))
+        assert f.add(R2Point(2, 2)).cnt() == 1
+
+    def test_cnt15(self):
+        f = Polygon(R2Point(0.0, -4.0),
+                    R2Point(1.0, -4.0),
+                    R2Point(0.0, -3.0))
+        assert f.add(R2Point(0, 0)).cnt() == 2
